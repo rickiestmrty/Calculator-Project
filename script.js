@@ -14,7 +14,7 @@ function buttonAssignment(){
         
         if(button.parentElement.parentElement.className == "numbers-btns"){
             button.addEventListener('click',()=>{
-                if((strDisplay == "Press any digit to start")||(strResult!="0")){
+                if((strDisplay == "Press any digit to start")||(RESULT.textContent!="0")){
                     strDisplay = ""
                 }
                 strDisplay += button.id;
@@ -29,14 +29,17 @@ function buttonAssignment(){
         }
         if(button.parentElement.className == "operands-btns"){
             button.addEventListener('click',()=>{
+                if(button.id == "btnequals"){
+                    calculate(1);
+                }
+
                 if(cntOperator == 1){
                     calculate(0);
                     strDisplay = strResult + " " + button.id + " ";
                     DISPLAY.textContent = strDisplay;
+                    cntOperator++;
                 }
-                else if(button.id == "btnequals"){
-                    calculate(1);
-                }
+                
                 else if(strDisplay != "Press any digit to start"){
                     strDisplay = strDisplay + " " + button.id + " ";
                     DISPLAY.textContent = strDisplay;
@@ -57,16 +60,18 @@ function calculate(x){
     let answer = 0;
 
     STRINGARRAY.forEach(ele => {
-        OPERATORS.forEach(operator => {
+        OPERATORS.every(operator => {
             if(ele == operator){
                 currOperator = ele;
-            }
-            else{
-                let newNum = parseInt(ele);
-                nums.push(newNum);
-                console.log(nums);
+                return false;
             }
         });
+        if(ele != currOperator){
+            let newNum = parseInt(ele);
+            nums.push(newNum);
+            console.log(nums);
+        }
+        
     });
 
     switch (currOperator){
@@ -90,6 +95,8 @@ function calculate(x){
     if(x==1){
         RESULT.textContent = strResult;
     }
+
+    cntOperator = 0;
 }
 
 main();
