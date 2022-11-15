@@ -11,6 +11,8 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    background-color: #CEE6D4;
 }
 .display-container{
     width: 250px;
@@ -62,12 +64,19 @@ button:hover{
     gap: 5px;
 }
 .operands-btns{
-    padding-top: 30px;
+    padding-top: 20px;
+}
+.operands-btns button{
+    background-color: #ED8EA4;
 }
 .misc-btns{
     padding-top: 20px;
     padding-bottom: 5px;
+    
 }
-#btnequals{
-    height: 110px;
+.misc-btns button, #dot{
+    background-color: #EFE0C2;
+}
+#zero{
+    width: 100px;
 }
